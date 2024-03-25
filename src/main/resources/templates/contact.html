@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang = "en" xmlns:th="https://www.thymeleaf.org"  th:replace="base::layout(~{::section})">
+<head>
+    <meta charset = "UTF-8">
+    <title>Contact Us</title>
+</head>
+<body>
+<section>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <h2 class="text-center mb-4 animated slideInLeft">Contact Us</h2>
+                <br/>
+                <h5>Hello Friends My Name is <span th:text="${name}"></span> , Current Time is  <span th:text="${name}"></span> </h5>
+                <form class="animated slideInRight">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" rows="5" placeholder="Enter your message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

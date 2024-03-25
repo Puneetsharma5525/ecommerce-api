@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Footer Template </title>
+</head>
+
+<body>
+    <footer th:fragment="bottom-footer(firstName,lastName,dateTime)" id="fragment-tag">
+        <div class="card">
+            <div class="card-header">
+                Featured
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-title">my Name is <span th:text="${firstName} +' '"> </span><span
+                        th:text="${lastName}"></span></p>
+                <p class="card-title">Date Time : <span th:text="${dateTime}"></span></p>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
