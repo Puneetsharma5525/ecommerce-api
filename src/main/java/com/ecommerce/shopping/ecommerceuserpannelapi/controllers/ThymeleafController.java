@@ -1,12 +1,12 @@
 package com.ecommerce.shopping.ecommerceuserpannelapi.controllers;
 
 import com.ecommerce.shopping.ecommerceuserpannelapi.entities.LoginData;
+import jakarta.validation.Valid;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
