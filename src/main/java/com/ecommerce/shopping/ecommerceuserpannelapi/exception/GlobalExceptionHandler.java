@@ -1,26 +1,39 @@
-//package com.ecommerce.shopping.ecommerceuserpannelapi.exception;
-//
-//import com.ecommerce.shopping.ecommerceuserpannelapi.payloads.ApiResponse;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.ExceptionHandler;
-//import org.springframework.web.bind.annotation.RestControllerAdvice;
-//
-//@RestControllerAdvice
-//public class GlobalExceptionHandler {
-//    @ExceptionHandler(ResourceNotFoundExceptions.class)
-//    public ResponseEntity<ApiResponse> resourceNotFoundExceptionHandler(ResourceNotFoundExceptions ex) {
-//        String message = ex.getMessage();
-//        String title = ex.getResourceFieldName();
-//        ApiResponse apiResponse = new ApiResponse(HttpStatus.NOT_FOUND, title, message);
-//        return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
-//    }
-//
-//    @ExceptionHandler(HeaderNotFoundExceptions.class)
-//    public ResponseEntity<ApiResponse> headerNotFoundExceptions(HeaderNotFoundExceptions ex) {
-//        String message = ex.getMessage();
-//        ApiResponse apiResponse = new ApiResponse(HttpStatus.NOT_FOUND, "title", message);
-//        return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
-//    }
-//
-//}
+package com.ecommerce.shopping.ecommerceuserpannelapi.exception;
+
+
+import com.ecommerce.shopping.ecommerceuserpannelapi.payloads.ApiResponse;
+import com.ecommerce.shopping.ecommerceuserpannelapi.payloads.ApiResponseObject;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.sql.SQLIntegrityConstraintViolationException;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiResponse> handleMissingRequestBody(HttpMessageNotReadableException ex) {
+        ApiResponse response = new ApiResponse(HttpStatus.BAD_REQUEST, "Invalid", "Required request body is missing");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponseObject<?>> handleException(Exception ex) {
+        String errorMessage = ex.getMessage() != null ? ex.getMessage() : "Unknown error occurred";
+        ApiResponseObject<?> response = new ApiResponseObject<>(HttpStatus.INTERNAL_SERVER_ERROR, errorMessage, "Invalid", null);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity<ApiResponseObject<?>> handleSqlIntegrityConstraintViolation(SQLIntegrityConstraintViolationException ex) {
+        if (ex.getMessage().contains("Duplicate entry")) {
+            String errorMessage = "Email already exists. Please choose a different email.";
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseObject<>(HttpStatus.CONFLICT, errorMessage, "Invalid", null));
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponseObject<>(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", "Error", null));
+        }
+    }
+}
