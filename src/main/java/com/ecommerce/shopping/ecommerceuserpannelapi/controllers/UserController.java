@@ -13,21 +13,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api/")
 public class UserController {
     @Autowired
     UserImpl userService;
-    @GetMapping("/user/{id}")
+    @GetMapping("user/{id}")
     public ApiResponseObject<UserEntities> getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
 
-    @GetMapping("/user")
+    @GetMapping("user")
     public ApiResponseObject<List<UserEntities>> getAllUsers() {
         return userService.getAllUser();
     }
 
-    @PostMapping("/user")
+    @PostMapping("user")
     public ApiResponseObject<UserEntities> addUser(@Valid @RequestBody UserEntities userEntities, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
@@ -39,7 +39,7 @@ public class UserController {
         return userService.addUser(userEntities);
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("user/{id}")
     public ApiResponseObject<UserEntities> deleteUser(@PathVariable Long id) {
         return userService.deleteUser(id);
     }

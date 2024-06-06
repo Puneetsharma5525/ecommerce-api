@@ -1,13 +1,10 @@
 package com.ecommerce.shopping.ecommerceuserpannelapi.controllers;
-
 import com.ecommerce.shopping.ecommerceuserpannelapi.entities.AboutUs;
 import com.ecommerce.shopping.ecommerceuserpannelapi.imples.AboutUsImpl;
 import com.ecommerce.shopping.ecommerceuserpannelapi.payloads.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @RestController

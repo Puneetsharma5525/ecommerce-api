@@ -11,7 +11,7 @@ public class ApiResponseObject<T> {
     private String message;
     private String status;
     private T data;
-    public ApiResponseObject(HttpStatus errCode, String message, String status, T data) {
+    public ApiResponseObject(HttpStatus errCode, String message, String status, T data ) {
         this.err_code = errCode;
         this.message = message;
         this.status = status;

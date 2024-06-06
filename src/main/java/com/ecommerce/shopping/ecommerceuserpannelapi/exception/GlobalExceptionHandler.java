@@ -3,13 +3,13 @@ package com.ecommerce.shopping.ecommerceuserpannelapi.exception;
 
 import com.ecommerce.shopping.ecommerceuserpannelapi.payloads.ApiResponse;
 import com.ecommerce.shopping.ecommerceuserpannelapi.payloads.ApiResponseObject;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.nio.file.AccessDeniedException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestControllerAdvice
@@ -36,4 +36,5 @@ public class GlobalExceptionHandler {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponseObject<>(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", "Error", null));
         }
     }
+
 }

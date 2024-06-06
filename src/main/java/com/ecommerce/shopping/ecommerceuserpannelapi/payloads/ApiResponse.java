@@ -7,8 +7,8 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 @ToString
 @AllArgsConstructor
-public class ApiResponse {
-   private HttpStatus err_code;
+public class ApiResponse{
+    private HttpStatus err_code;
     private String status;
     private String message;
 }
